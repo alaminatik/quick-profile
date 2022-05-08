@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -29,18 +30,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUser $request)
     {
         try {
-
-            $request->validate([
-                'name' => 'required',  
-                'email' => 'required|unique:users,email',  
-                'username' => 'required|unique:users,username',  
-                'mobile' => 'required|max:11',                      
-                'about_me' => 'nullable|string|max:500',             
-                'password' => 'required|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',             
-            ]);
             
             $user = new User();
             $user->name = $request->name;
