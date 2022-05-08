@@ -33,11 +33,11 @@ class UserController extends Controller
         // return $request;
         $request->validate([
             'name' => 'required',  
-            'email' => 'required',  
-            'username' => 'required',  
-            'mobile' => 'required',                      
-            'about_me' => 'string|max:500',             
-            'password' => 'numeric|string',             
+            'email' => 'required|unique:users,email',  
+            'username' => 'required|unique:users,username',  
+            'mobile' => 'required|max:11',                      
+            'about_me' => 'nullable|string|max:500',             
+            'password' => 'required|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',             
         ]);
         
         $user = new User();
@@ -55,7 +55,6 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($username)
