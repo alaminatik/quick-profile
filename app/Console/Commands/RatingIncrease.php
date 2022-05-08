@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class RatingIncrease extends Command
 {
@@ -38,21 +39,33 @@ class RatingIncrease extends Command
      */
     public function handle()
     {
-        // For User rating increase
+       
+        try {
 
-        $users = User::cursor();
+            // For User rating increase
 
-        foreach($users as $user){
+            $users = User::cursor();
 
-            $last_ratings = $user->ratings;
-            $latest_ratings = $last_ratings + rand(1,9);
-    
-            User::where('id',$user->id)
-                ->update([
-                    'ratings' => $latest_ratings
-                ]);
-        }
+            foreach($users as $user){
 
-        $this->info('User rating increase successfully');
+                $last_ratings = $user->ratings;
+                $latest_ratings = $last_ratings + rand(1,9);
+
+                User::where('id',$user->id)
+                    ->update([
+                        'ratings' => $latest_ratings
+                    ]);
+            }
+
+            $this->info('User rating increase successfully');
+
+ 
+         } catch (\Exception $e) {
+
+            Log::error($e->getFile(). ' '. $e->getLine(). ' '. $e->getMessage());
+            return redirect()->back()->withErrors([
+                'errorMsg' => 'Something went wrong. Please try again later.'
+            ]);
+         }
     }
 }

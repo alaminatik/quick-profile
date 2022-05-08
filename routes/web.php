@@ -14,11 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
 // For User Quick Profile
 
 Route::get('/', [UserController::class, 'create'])->name('user.create');
