@@ -19,7 +19,7 @@ class RatingIncrease extends Command
      *
      * @var string
      */
-    protected $description = 'User rating increase Daily';
+    protected $description = 'User rating increase daily';
 
     /**
      * Create a new command instance.
@@ -40,7 +40,7 @@ class RatingIncrease extends Command
     {
         // For User rating increase
 
-        $users = User::all();
+        $users = User::cursor();
 
         foreach($users as $user){
 
