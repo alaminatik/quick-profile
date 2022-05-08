@@ -1,7 +1,7 @@
-## Install Application
+## Quick Profile With Laravel Cron Job 
 
 This application is make with php framework laravel with incredible MySql database
-
+### Install Application
 ```bash
     git clone https://github.com/alaminatik/quick-profile.git
     cd quick-profile
